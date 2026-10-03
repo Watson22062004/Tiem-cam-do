@@ -40,53 +40,23 @@
 <div id="nav"></div>
 </div>
 
+<script src="storage.js"></script>
+<script src="core.js"></script>
+<script src="events.js"></script>
+<script src="icons.js"></script>
+<script src="market.js"></script>
+<script src="tax.js"></script>
+<script src="pawn.js"></script>
+<script src="staff.js"></script>
+<script src="patch-kind.js"></script>
+<script src="patch-npcs.js"></script>
+<script src="patch-celeb.js"></script>
+<script src="patch-autosave.js"></script>
+<script src="patch-dedupe.js"></script>
+<script src="patch-genz.js"></script>
 <script>
-(function(){
-  const files = [
-
-  'core.js',
-
-  'events.js',
-  'icons.js',
-
-  'market.js',
-  'tax.js',
-  'pawn.js',
-  'staff.js',
-
-  'patch-kind.js',
-  'patch-npcs.js',
-  'patch-celeb.js',
-  'patch-autosave.js',
-  'patch-dedupe.js',
-  'patch-genz.js'
-
-];
-
-  let done = 0;
-  const go = async () => {
-    if (done) return;
-    done = 1;
-    for (const src of files) {
-      try {
-        const res = await fetch(src, {cache: 'no-cache'});
-        if (!res.ok) throw new Error('HTTP ' + res.status);
-        const text = await res.text();
-        const s = document.createElement('script');
-        s.text = text;
-        document.body.appendChild(s);
-      } catch (e) {
-        alert('Failed: ' + src + '\n' + e);
-        console.error('Failed to load', src, e);
-        if (src === 'core.js') { document.body.insertAdjacentHTML('beforeend', '<div style="position:fixed;inset:0;z-index:99999;background:#1c120b;color:#ffe9b0;display:flex;align-items:center;justify-content:center;text-align:center;padding:24px;font:20px sans-serif">Không tải được file game (core.js).<br>Hãy kiểm tra mạng rồi tải lại trang.</div>'); break; }
-      }
-    }
-  };
-  Promise.race([
-    (window.TCD && TCD.ready) || Promise.resolve(),
-    new Promise(r => setTimeout(r, 5000))
-  ]).then(go, go);
-})();
+window.addEventListener('error',function(e){console.error('TCD error:',e.message,e.filename,e.lineno,e.colno,e.error);});
+window.addEventListener('unhandledrejection',function(e){console.error('TCD promise error:',e.reason);});
 </script>
 </body>
 </html>

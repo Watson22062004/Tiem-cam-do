@@ -75,10 +75,9 @@
         const s = document.createElement('script');
         s.text = text;
         document.body.appendChild(s);
-} catch (e) {
-   alert('Failed: ' + src + '\n' + e);
-   console.error('Failed to load', src, e);
-}
+      } catch (e) {
+        alert('Failed: ' + src + '\n' + e);
+        console.error('Failed to load', src, e);
         if (src === 'core.js') { document.body.insertAdjacentHTML('beforeend', '<div style="position:fixed;inset:0;z-index:99999;background:#1c120b;color:#ffe9b0;display:flex;align-items:center;justify-content:center;text-align:center;padding:24px;font:20px sans-serif">Không tải được file game (core.js).<br>Hãy kiểm tra mạng rồi tải lại trang.</div>'); break; }
       }
     }

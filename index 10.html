@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<title>Tiệm Cầm Đồ – Game pixel quản lý tiệm cầm đồ &amp; đồ cổ</title>
+<meta name="description" content="Game pixel quản lý tiệm cầm đồ và tiệm đồ cổ: mua bán, thẩm định bằng kính lúp, sửa chữa, mặc cả và giữ uy tín để phát triển tiệm.">
+<meta name="theme-color" content="#4a2f1a">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32">
+<link rel="shortcut icon" href="favicon.ico">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Tiệm Cầm Đồ">
+
+<meta property="og:url" content="https://watson22062004.github.io/Tiem-cam-do-/">
+<meta property="og:image" content="https://watson22062004.github.io/Tiem-cam-do-/og-image.png">
+<meta name="twitter:image" content="https://watson22062004.github.io/Tiem-cam-do-/og-image.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Tiệm Cầm Đồ">
+<meta property="og:title" content="Tiệm Cầm Đồ – Game pixel quản lý tiệm cầm đồ &amp; đồ cổ">
+<meta property="og:description" content="Game pixel quản lý tiệm cầm đồ và tiệm đồ cổ: mua bán, thẩm định bằng kính lúp, sửa chữa, mặc cả và giữ uy tín để phát triển tiệm.">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="vi_VN">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Tiệm Cầm Đồ – Game pixel quản lý tiệm cầm đồ &amp; đồ cổ">
+<meta name="twitter:description" content="Game pixel quản lý tiệm cầm đồ và tiệm đồ cổ: mua bán, thẩm định bằng kính lúp, sửa chữa, mặc cả và giữ uy tín để phát triển tiệm.">
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@500;600;700;800&family=VT323&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css">
+<script src="storage.js"></script>
+</head>
+<body>
+<div id="toast"></div><div id="app">
+<div id="top"><span id="tm1"></span><span id="tm2"></span><span id="tm3"></span><span id="tm4"></span><span id="tm5" onclick="mute=!mute;this.textContent=mute?'🔇':'🔊'">🔊</span><span id="tm6" onclick="musTog()">🎵</span></div>
+<div id="stage"><canvas id="cv" width="320" height="180"></canvas><div id="bubbles"></div><div id="dlg"></div></div>
+<div id="nav"></div>
+</div>
+
+<script>
+(function(){
+  const files = [
+
+  'core.js',
+
+  'events.js',
+  'icons.js',
+
+  'market.js',
+  'tax.js',
+  'pawn.js',
+  'staff.js',
+
+  'patch-kind.js',
+  'patch-npcs.js',
+  'patch-celeb.js',
+  'patch-autosave.js',
+  'patch-dedupe.js',
+  'patch-genz.js'
+
+];
+
+  let done = 0;
+  const go = async () => {
+    if (done) return;
+    done = 1;
+    for (const src of files) {
+      try {
+        const res = await fetch(src, {cache: 'no-cache'});
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        const text = await res.text();
+        const s = document.createElement('script');
+        s.text = text;
+        document.body.appendChild(s);
+      catch (e) {
+   alert('Failed: ' + src + '\n' + e);
+   console.error('Failed to load', src, e);
+}
+        if (src === 'core.js') { document.body.insertAdjacentHTML('beforeend', '<div style="position:fixed;inset:0;z-index:99999;background:#1c120b;color:#ffe9b0;display:flex;align-items:center;justify-content:center;text-align:center;padding:24px;font:20px sans-serif">Không tải được file game (core.js).<br>Hãy kiểm tra mạng rồi tải lại trang.</div>'); break; }
+      }
+    }
+  };
+  Promise.race([
+    (window.TCD && TCD.ready) || Promise.resolve(),
+    new Promise(r => setTimeout(r, 5000))
+  ]).then(go, go);
+})();
+</script>
+</body>
+</html>
